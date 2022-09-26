@@ -25,6 +25,21 @@ class ChessAndroidTests():
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub',
                                        desired_caps)
         sleep(10)
+        self.login()
+
+        sleep(5)
+
+        # If app requires protection method - select None
+        protection_title_element = self.get_element(
+            value='by.com.life.lifego:id/main_screen_text', type='id')
+        protection_title_text = protection_title_element.get_attribute('text')
+        if protection_title_text == 'Защитить Мой life:)':
+            # Select None
+            self.get_element(
+                value="//*/android.widget.RadioButton[1]", type='xpath').click()
+            self.get_element(
+                value=elements.BUTTONS['NEXT_ID'], type='id').click()
+
     def login(self):
         # If popup asking app notifications right has place - deny
         notifications_pushup = self.get_element(
