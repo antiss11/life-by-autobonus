@@ -17,6 +17,8 @@ def str2bool(str):
         raise TypeError(f'Cannot convert string with value "{str}" to bool')
 
 
+class AutobonusDriver():
+
     def setUp(self):
         desired_caps = {}
         desired_caps['platformName'] = 'Android'
