@@ -4,7 +4,14 @@ from time import sleep
 import elements
 
 
-class ChessAndroidTests():
+def str2bool(str):
+    if (str == 'true'):
+        return True
+    elif (str == 'false'):
+        return False
+    else:
+        raise TypeError(f'Cannot convert string with value "{str}" to bool')
+
 
     def setUp(self):
         desired_caps = {}
