@@ -41,8 +41,12 @@ class ChessAndroidTests():
         else:
             return False
 
-    def inputText(self, where, text):
-        self.driver.find_element(by=AppiumBy.ID, value=where).send_keys(text)
+    def inputText(self, where, type, text):
+        # print(isinstance(where, WebElement))
+        if (isinstance(where, WebElement)):
+            where.send_keys(text)
+        else:
+            self.get_element(type=type, value=where).send_keys(text)
 
 
 if __name__ == '__main__':
