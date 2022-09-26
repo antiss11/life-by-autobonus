@@ -46,8 +46,11 @@ def str2bool(str):
         except NoSuchElementException:
             return False
 
-    def inputText(self, where, text):
-        self.driver.find_element(by=AppiumBy.ID, value=where).send_keys(text)
+    def input_text(self, where, type, text):
+        if (isinstance(where, WebElement)):
+            where.send_keys(text)
+        else:
+            self.get_element(type=type, value=where).send_keys(text)
 
 
 if __name__ == '__main__':
