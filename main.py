@@ -92,5 +92,5 @@ class AutobonusDriver():
 
 
 if __name__ == '__main__':
-    app = ChessAndroidTests()
+    app = AutobonusDriver()
     app.setUp()
