@@ -2,6 +2,13 @@ from appium.webdriver.common.appiumby import AppiumBy
 from appium import webdriver
 from time import sleep
 import elements
+def str2bool(str):
+    if (str == 'true'):
+        return True
+    elif (str == 'false'):
+        return False
+    else:
+        raise TypeError(f'Cannot convert string with value "{str}" to bool')
 
 
 class ChessAndroidTests():
