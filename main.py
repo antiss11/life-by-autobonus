@@ -27,7 +27,6 @@ class AutobonusDriver():
         desired_caps['appium:appWaitForLaunch'] = False
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub',
                                        desired_caps)
-        sleep(4)
         self.login()
         sleep(5)
 
@@ -60,6 +59,7 @@ class AutobonusDriver():
             value=elements.FIELDS['PHONE_ID'], type='id')
         if not phone_field:
             return
+
         self.input_text(phone_field, CREDENTIALS['LOGIN'])
         self.input_text(
             elements.FIELDS['PASSWORD_ID'], CREDENTIALS['PASSWORD'])
