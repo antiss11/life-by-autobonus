@@ -1,7 +1,11 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from appium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from appium.webdriver.webelement import WebElement
+from config import CREDENTIALS
 from time import sleep
 import elements
+import subprocess
 
 
 def str2bool(str):
