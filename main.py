@@ -1,7 +1,10 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from appium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from appium.webdriver.webelement import WebElement
 from time import sleep
 import elements
+from config import CREDENTIALS
 def str2bool(str):
     if (str == 'true'):
         return True
