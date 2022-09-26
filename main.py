@@ -33,12 +33,13 @@ def str2bool(str):
                 by=AppiumBy.ID, value=elements.CHECKBOXES['KEEP_PASSWORD'])
             print(keepPasswordCheckbox.get_attribute('checked'))
 
-    def loginNeeded(self):
-        phoneField = self.driver.find_element(
-            by=AppiumBy.ID, value=elements.FIELDS['PHONE'])
-        if phoneField:
-            return True
-        else:
+    def get_element(self, type, value):
+        try:
+            if (type == 'id'):
+                return self.driver.find_element(by=AppiumBy.ID, value=value)
+            elif (type == 'xpath'):
+                return self.driver.find_element(by=AppiumBy.XPATH, value=value)
+        except NoSuchElementException:
             return False
 
     def inputText(self, where, text):
