@@ -22,16 +22,32 @@ class ChessAndroidTests():
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub',
                                        desired_caps)
         sleep(10)
-        self.driver.find_element(
-            by=AppiumBy.ID, value=elements.BUTTONS['NOTIFICATIONS_DENY']).click()
-        sleep(4)
-        if self.loginNeeded:
-            self.inputText(elements.FIELDS['PHONE'], NUMBER)
-            self.inputText(elements.FIELDS['PASSWORD'], PASSWORD)
-            sleep(2)
+    def login(self):
+        # If popup asking app notifications right has place - deny
+        notifications_pushup = self.get_element(
+            value=elements.BUTTONS['NOTIFICATIONS_DENY_ID'], type='id')
+        if (notifications_pushup):
+            notifications_pushup.click()
+
+        # If login requires - type login and password
+        phone_field = self.get_element(
+            value=elements.FIELDS['PHONE_ID'], type='id')
+        if not phone_field:
+            return
+        self.inputText(phone_field, CREDENTIALS['LOGIN'])
+        self.inputText(
+            elements.FIELDS['PASSWORD_ID'], CREDENTIALS['PASSWORD'])
+
+        # Save password in app
             keepPasswordCheckbox = self.driver.find_element(
-                by=AppiumBy.ID, value=elements.CHECKBOXES['KEEP_PASSWORD'])
-            print(keepPasswordCheckbox.get_attribute('checked'))
+            by=AppiumBy.ID, value=elements.CHECKBOXES['KEEP_PASSWORD_ID'])
+        isChecked = str2bool(keepPasswordCheckbox.get_attribute('checked'))
+        if not isChecked:
+            keepPasswordCheckbox.click()
+
+        # Click login button
+        self.get_element(
+            value=elements.BUTTONS['LOGIN_ID'], type='id').click()
 
     def get_element(self, type, value):
         try:
