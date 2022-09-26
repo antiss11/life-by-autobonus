@@ -27,10 +27,27 @@ class AutobonusDriver():
         desired_caps['appium:appWaitForLaunch'] = False
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub',
                                        desired_caps)
-        sleep(10)
-        self.driver.find_element(
-            by=AppiumBy.ID, value=elements.BUTTONS['NOTIFICATIONS_DENY']).click()
         sleep(4)
+        self.login()
+        sleep(5)
+
+        # If app requires protection method - select None
+        protection_title_element = self.get_element(
+            value='by.com.life.lifego:id/main_screen_text', type='id')
+        protection_title_text = protection_title_element.get_attribute('text')
+        if protection_title_text == 'Защитить Мой life:)':
+            # Select None
+            self.get_element(
+                value=elements.RADIOS['APP_PROTECTION_METHOD_NONE_XPATH'], type='xpath').click()
+            self.get_element(
+                value=elements.BUTTONS['NEXT_ID'], type='id').click()
+        sleep(5)
+
+        # Click on the first icon in the hotbar (by default it is bonus action)
+        self.get_element(
+            value='by.com.life.lifego:id/first_button', type='id').click()
+        subprocess.run("./shake.sh")
+
     def login(self):
         # If popup asking app notifications right has place - deny
         notifications_pushup = self.get_element(
