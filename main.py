@@ -27,6 +27,7 @@ class AutobonusDriver():
         desired_caps['appium:appWaitForLaunch'] = False
         self.driver = webdriver.Remote('http://localhost:4723/wd/hub',
                                        desired_caps)
+        sleep(10)
         self.login()
         sleep(5)
 
@@ -45,6 +46,8 @@ class AutobonusDriver():
         # Click on the first icon in the hotbar (by default it is bonus action)
         self.get_element(
             value='by.com.life.lifego:id/first_button', type='id').click()
+
+        sleep(5)
         subprocess.run("./shake.sh")
 
     def login(self):
