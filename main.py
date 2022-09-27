@@ -1,6 +1,6 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from appium import webdriver
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from appium.webdriver.webelement import WebElement
 from config import CREDENTIALS
 from time import sleep
@@ -94,7 +94,7 @@ class AutobonusDriver():
             element = WebDriverWait(self.driver, time).until(
                 EC.element_to_be_clickable((By[type], value)))
             return element
-        except NoSuchElementException:
+        except (NoSuchElementException, TimeoutException):
             return False
 
     def input_text(self, where, text, type='id'):
