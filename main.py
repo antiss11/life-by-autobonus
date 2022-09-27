@@ -84,7 +84,7 @@ class AutobonusDriver():
         except NoSuchElementException:
             return False
 
-    def input_text(self, where, type, text):
+    def input_text(self, where, text, type='id'):
         if (isinstance(where, WebElement)):
             where.send_keys(text)
         else:
