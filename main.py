@@ -4,6 +4,9 @@ from selenium.common.exceptions import NoSuchElementException
 from appium.webdriver.webelement import WebElement
 from config import CREDENTIALS
 from time import sleep
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import elements
 import subprocess
 
@@ -32,9 +35,8 @@ class AutobonusDriver():
         sleep(5)
 
         # If app requires protection method - select None
-        protection_title_element = self.get_element(
-            value='by.com.life.lifego:id/main_screen_text', type='id')
-        protection_title_text = protection_title_element.get_attribute('text')
+        protection_title_element = self.get_element_with_wait(
+            elements.TEXT['APP_PROTECTION_METHOD_TITLE_ID'])
         if protection_title_text == 'Защитить Мой life:)':
             # Select None
             self.get_element(
@@ -44,8 +46,8 @@ class AutobonusDriver():
         sleep(5)
 
         # Click on the first icon in the hotbar (by default it is bonus action)
-        self.get_element(
-            value='by.com.life.lifego:id/first_button', type='id').click()
+        self.get_element_with_wait(
+            elements.BUTTONS['HOTBAR_FIRST_ID'], selector_type='ID').click()
 
         sleep(5)
         subprocess.run("./shake.sh")
@@ -84,6 +86,14 @@ class AutobonusDriver():
                 return self.driver.find_element(by=AppiumBy.ID, value=value)
             elif (type == 'xpath'):
                 return self.driver.find_element(by=AppiumBy.XPATH, value=value)
+        except NoSuchElementException:
+            return False
+
+    def get_element_with_wait(self, value, time=10, type='ID'):
+        try:
+            element = WebDriverWait(self.driver, time).until(
+                EC.element_to_be_clickable((By[type], value)))
+            return element
         except NoSuchElementException:
             return False
 
