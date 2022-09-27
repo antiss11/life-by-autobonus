@@ -90,6 +90,14 @@ class AutobonusDriver():
         except NoSuchElementException:
             return False
 
+    def get_element_with_wait(self, value, time=10, type='ID'):
+        try:
+            element = WebDriverWait(self.driver, time).until(
+                EC.element_to_be_clickable((By[type], value)))
+            return element
+        except NoSuchElementException:
+            return False
+
     def input_text(self, where, text, type='id'):
         if (isinstance(where, WebElement)):
             where.send_keys(text)
