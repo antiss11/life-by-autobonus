@@ -35,9 +35,8 @@ class AutobonusDriver():
         sleep(5)
 
         # If app requires protection method - select None
-        protection_title_element = self.get_element(
-            value='by.com.life.lifego:id/main_screen_text', type='id')
-        protection_title_text = protection_title_element.get_attribute('text')
+        protection_title_element = self.get_element_with_wait(
+            elements.TEXT['APP_PROTECTION_METHOD_TITLE_ID'])
         if protection_title_text == 'Защитить Мой life:)':
             # Select None
             self.get_element(
@@ -47,8 +46,8 @@ class AutobonusDriver():
         sleep(5)
 
         # Click on the first icon in the hotbar (by default it is bonus action)
-        self.get_element(
-            value='by.com.life.lifego:id/first_button', type='id').click()
+        self.get_element_with_wait(
+            elements.BUTTONS['HOTBAR_FIRST_ID'], selector_type='ID').click()
 
         sleep(5)
         subprocess.run("./shake.sh")
