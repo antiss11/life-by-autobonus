@@ -26,4 +26,8 @@ adb devices
 The output will be like `emulator-5554`. The numbers define `port`. In this example `port` is `5554`.
 
 ### Headless mode
-Script also works with android in headless mode! To make your android emulator headless follow [this](https://gist.github.com/nhtua/2d294f276dc1e110a7ac14d69c37904f). 
+Script also works with android in headless mode! To make your android emulator headless follow [this](https://gist.github.com/nhtua/2d294f276dc1e110a7ac14d69c37904f). \
+My example of running [here](https://github.com/antiss11/linux-scripts/blob/master/life_take_bonus.sh).
+
+### Notes
+This script was tested with `Android 7.0` and screen size `4.7in` so I recommend use this parameters.
