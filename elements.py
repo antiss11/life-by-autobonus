@@ -2,6 +2,7 @@ BUTTONS = {
     'NOTIFICATIONS_DENY_ID': "com.android.permissioncontroller:id/permission_deny_button",
     'LOGIN_ID': "by.com.life.lifego:id/primaryButton",
     'HOTBAR_FIRST_ID': 'by.com.life.lifego:id/first_button',
+    'NEXT_ID': 'by.com.life.lifego:id/nextButton',
 }
 
 FIELDS = {
