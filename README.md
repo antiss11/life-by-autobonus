@@ -18,7 +18,7 @@ To configure `Appium Server` follow the [instructions](https://medium.com/@iqra.
 `host` and `port` should contained host and port from `Appium Server`.\
 3. `telnet_token` \
 To get token you need to connect to running android emulator manually ([instructions](https://developer.android.com/studio/run/emulator-console)).\
-4. `android_vdi` \
+4. `emulator` \
 `host` by default is `localhost` or `127.0.0.1`. To get `port` you should enter the follow with running emulator:
 ``` bash
 adb devices
