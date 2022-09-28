@@ -33,7 +33,11 @@ class AutobonusDriver:
         desired_caps["deviceName"] = "Android Emulator"
         desired_caps["app"] = abspath("life.apk")
         desired_caps["appium:appWaitForLaunch"] = False
-        self.driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+        url = (
+            f"http://{self.config['appium_server']['host']}:"
+            f"{self.config['appium_server']['port']}/wd/hub"
+        )
+        self.driver = webdriver.Remote(url, desired_caps)
 
     def login(self):
         # If popup asking app notifications right has place - deny
@@ -48,8 +52,10 @@ class AutobonusDriver:
         if not phone_field:
             return
 
-        self.input_text(phone_field, CREDENTIALS["LOGIN"])
-        self.input_text(elements.FIELDS["PASSWORD_ID"], CREDENTIALS["PASSWORD"])
+        self.input_text(phone_field, self.config["credentials"]["login"])
+        self.input_text(
+            elements.FIELDS["PASSWORD_ID"], self.config["credentials"]["password"]
+        )
 
         # Save password in app
         keepPasswordCheckbox = self.get_element_with_wait(
@@ -83,6 +89,14 @@ class AutobonusDriver:
 
     def take_bonus(self):
         self.get_element_with_wait(elements.GAME["TEXT_ID"], timeout=30)
+        subprocess.run(
+            (
+                f"./shake.sh {self.config['android_vdi']['host']} "
+                f"{self.config['android_vdi']['port']} {self.config['telnet_token']}"
+            ),
+            shell=True,
+        )
+
     def swipe_to_top(self):
         # This code guarantee that hotbar always can be clicked
         for i in range(0, 5):
