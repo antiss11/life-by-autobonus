@@ -125,5 +125,6 @@ if __name__ == "__main__":
     app.setUp()
     app.login()
     app.skip_protection()
+    app.swipe_to_top()
     app.select_game()
     app.take_bonus()
