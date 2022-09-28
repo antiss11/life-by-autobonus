@@ -6,10 +6,10 @@ set port [lindex $argv 1]
 set token [lindex $argv 2]
 
 spawn telnet $host $port
-
 expect "OK"
 send "auth $token\r"
-for {set i 0} {$i <= 11} {incr i} {
+
+for {set i 0} {$i <= 3} {incr i} {
 	send "rotate\r"
 	sleep 0.2
 }
