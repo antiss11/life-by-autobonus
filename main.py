@@ -89,10 +89,10 @@ class AutobonusDriver():
         except NoSuchElementException:
             return False
 
-    def get_element_with_wait(self, value, time=10, type='ID'):
+    def get_element_with_wait(self, value, timeout=0, type='ID'):
         try:
-            element = WebDriverWait(self.driver, time).until(
-                EC.element_to_be_clickable((By[type], value)))
+            element = WebDriverWait(self.driver, timeout).until(
+                EC.element_to_be_clickable((getattr(By, type), value)))
             return element
         except (NoSuchElementException, TimeoutException):
             return False
