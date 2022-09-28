@@ -36,58 +36,50 @@ class AutobonusDriver():
 
         # If app requires protection method - select None
         protection_title_element = self.get_element_with_wait(
-            elements.TEXT['APP_PROTECTION_METHOD_TITLE_ID'])
-        if protection_title_text == 'Защитить Мой life:)':
+            elements.TEXT["APP_PROTECTION_METHOD_TITLE_ID"], timeout=30
+        )
+        protection_title_text = protection_title_element.get_attribute("text")
+        if protection_title_text == "Защитить Мой life:)":
             # Select None
-            self.get_element(
-                value=elements.RADIOS['APP_PROTECTION_METHOD_NONE_XPATH'], type='xpath').click()
-            self.get_element(
-                value=elements.BUTTONS['NEXT_ID'], type='id').click()
-        sleep(5)
+            self.get_element_with_wait(
+                elements.RADIOS["APP_PROTECTION_METHOD_NONE_XPATH"], type="XPATH"
+            ).click()
+            self.get_element_with_wait(elements.BUTTONS["NEXT_ID"]).click()
 
         # Click on the first icon in the hotbar (by default it is bonus action)
         self.get_element_with_wait(
-            elements.BUTTONS['HOTBAR_FIRST_ID'], selector_type='ID').click()
+            elements.BUTTONS["HOTBAR_FIRST_ID"], timeout=20
+        ).click()
 
         sleep(5)
         subprocess.run("./shake.sh")
 
     def login(self):
         # If popup asking app notifications right has place - deny
-        notifications_pushup = self.get_element(
-            value=elements.BUTTONS['NOTIFICATIONS_DENY_ID'], type='id')
-        if (notifications_pushup):
+        notifications_pushup = self.get_element_with_wait(
+            elements.BUTTONS["NOTIFICATIONS_DENY_ID"], timeout=10
+        )
+        if notifications_pushup:
             notifications_pushup.click()
 
         # If login requires - type login and password
-        phone_field = self.get_element(
-            value=elements.FIELDS['PHONE_ID'], type='id')
+        phone_field = self.get_element_with_wait(elements.FIELDS["PHONE_ID"])
         if not phone_field:
             return
 
-        self.input_text(phone_field, CREDENTIALS['LOGIN'])
-        self.input_text(
-            elements.FIELDS['PASSWORD_ID'], CREDENTIALS['PASSWORD'])
+        self.input_text(phone_field, CREDENTIALS["LOGIN"])
+        self.input_text(elements.FIELDS["PASSWORD_ID"], CREDENTIALS["PASSWORD"])
 
         # Save password in app
-        keepPasswordCheckbox = self.driver.find_element(
-            by=AppiumBy.ID, value=elements.CHECKBOXES['KEEP_PASSWORD_ID'])
-        isChecked = str2bool(keepPasswordCheckbox.get_attribute('checked'))
+        keepPasswordCheckbox = self.get_element_with_wait(
+            elements.CHECKBOXES["KEEP_PASSWORD_ID"]
+        )
+        isChecked = str2bool(keepPasswordCheckbox.get_attribute("checked"))
         if not isChecked:
             keepPasswordCheckbox.click()
 
         # Click login button
-        self.get_element(
-            value=elements.BUTTONS['LOGIN_ID'], type='id').click()
-
-    def get_element(self, type, value):
-        try:
-            if (type == 'id'):
-                return self.driver.find_element(by=AppiumBy.ID, value=value)
-            elif (type == 'xpath'):
-                return self.driver.find_element(by=AppiumBy.XPATH, value=value)
-        except NoSuchElementException:
-            return False
+        self.get_element_with_wait(elements.BUTTONS["LOGIN_ID"]).click()
 
     def get_element_with_wait(self, value, timeout=0, type='ID'):
         try:
