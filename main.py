@@ -99,6 +99,7 @@ class AutobonusDriver:
 
     def swipe_to_top(self):
         # This code guarantee that hotbar always can be clicked
+        sleep(1)
         for i in range(0, 5):
             self.driver.swipe(start_x=0, start_y=100, end_x=0, end_y=700, duration=100)
 
