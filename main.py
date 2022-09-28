@@ -25,7 +25,7 @@ class AutobonusDriver:
         desired_caps = {}
         desired_caps["platformName"] = "Android"
         desired_caps["deviceName"] = "Android Emulator"
-        desired_caps["app"] = "/home/antiss/life.apk"
+        desired_caps["app"] = abspath("life.apk")
         desired_caps["appium:appWaitForLaunch"] = False
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
 
