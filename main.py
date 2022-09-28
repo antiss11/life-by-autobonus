@@ -22,6 +22,10 @@ def str2bool(str):
 
 
 class AutobonusDriver:
+    def __init__(self):
+        with open("config.yml", "r") as stream:
+            self.config = yaml.safe_load(stream)
+
     def setUp(self):
         desired_caps = {}
         desired_caps["platformName"] = "Android"
