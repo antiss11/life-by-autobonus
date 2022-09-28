@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import elements
 import subprocess
+from os.path import abspath
 
 
 def str2bool(str):
@@ -28,10 +29,6 @@ class AutobonusDriver:
         desired_caps["app"] = abspath("life.apk")
         desired_caps["appium:appWaitForLaunch"] = False
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
-
-        self.login()
-        self.skip_protection()
-        self.select_game()
 
     def login(self):
         # If popup asking app notifications right has place - deny
@@ -81,6 +78,7 @@ class AutobonusDriver:
 
     def take_bonus(self):
         self.get_element_with_wait(elements.GAME["TEXT_ID"], timeout=30)
+        subprocess.run("./shake.sh localhost 5554 8jCUSBH8oc5Nlu9y")
 
     def get_element_with_wait(self, value, timeout=0, type="ID"):
         try:
@@ -100,4 +98,9 @@ class AutobonusDriver:
 
 if __name__ == "__main__":
     app = AutobonusDriver()
+
     app.setUp()
+    app.login()
+    app.skip_protection()
+    app.select_game()
+    app.take_bonus()
