@@ -97,11 +97,11 @@ class AutobonusDriver():
         except (NoSuchElementException, TimeoutException):
             return False
 
-    def input_text(self, where, text, type='id'):
+    def input_text(self, where, text, type='ID'):
         if (isinstance(where, WebElement)):
             where.send_keys(text)
         else:
-            self.get_element(type=type, value=where).send_keys(text)
+            self.get_element_with_wait(type=type, value=where).send_keys(text)
 
 
 if __name__ == '__main__':
