@@ -91,8 +91,8 @@ class AutobonusDriver:
         self.get_element_with_wait(elements.GAME["TEXT_ID"], timeout=30)
         subprocess.run(
             (
-                f"./shake.sh {self.config['android_vdi']['host']} "
-                f"{self.config['android_vdi']['port']} {self.config['telnet_token']}"
+                f"./shake.sh {self.config['emulator']['host']} "
+                f"{self.config['emulator']['port']} {self.config['telnet_token']}"
             ),
             shell=True,
         )
