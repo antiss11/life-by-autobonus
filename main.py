@@ -2,7 +2,6 @@ from appium.webdriver.common.appiumby import AppiumBy
 from appium import webdriver
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from appium.webdriver.webelement import WebElement
-from config import CREDENTIALS
 from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
