@@ -12,27 +12,23 @@ import subprocess
 
 
 def str2bool(str):
-    if (str == 'true'):
+    if str == "true":
         return True
-    elif (str == 'false'):
+    elif str == "false":
         return False
     else:
         raise TypeError(f'Cannot convert string with value "{str}" to bool')
 
 
-class AutobonusDriver():
-
+class AutobonusDriver:
     def setUp(self):
         desired_caps = {}
-        desired_caps['platformName'] = 'Android'
-        desired_caps['deviceName'] = 'Android Emulator'
-        desired_caps['app'] = '/home/antiss/Downloads/life.apk'
-        desired_caps['appium:appWaitForLaunch'] = False
-        self.driver = webdriver.Remote('http://localhost:4723/wd/hub',
-                                       desired_caps)
-        sleep(10)
+        desired_caps["platformName"] = "Android"
+        desired_caps["deviceName"] = "Android Emulator"
+        desired_caps["app"] = "/home/antiss/life.apk"
+        desired_caps["appium:appWaitForLaunch"] = False
+        self.driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
         self.login()
-        sleep(5)
 
         # If app requires protection method - select None
         protection_title_element = self.get_element_with_wait(
@@ -81,21 +77,22 @@ class AutobonusDriver():
         # Click login button
         self.get_element_with_wait(elements.BUTTONS["LOGIN_ID"]).click()
 
-    def get_element_with_wait(self, value, timeout=0, type='ID'):
+    def get_element_with_wait(self, value, timeout=0, type="ID"):
         try:
             element = WebDriverWait(self.driver, timeout).until(
-                EC.element_to_be_clickable((getattr(By, type), value)))
+                EC.element_to_be_clickable((getattr(By, type), value))
+            )
             return element
         except (NoSuchElementException, TimeoutException):
             return False
 
-    def input_text(self, where, text, type='ID'):
-        if (isinstance(where, WebElement)):
+    def input_text(self, where, text, type="ID"):
+        if isinstance(where, WebElement):
             where.send_keys(text)
         else:
             self.get_element_with_wait(type=type, value=where).send_keys(text)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = AutobonusDriver()
     app.setUp()
