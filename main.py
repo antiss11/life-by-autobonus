@@ -47,8 +47,7 @@ class AutobonusDriver:
             elements.BUTTONS["HOTBAR_FIRST_ID"], timeout=20
         ).click()
 
-        sleep(5)
-        subprocess.run("./shake.sh")
+        self.get_element_with_wait(elements.GAME['TEXT_ID'], timeout=30)
 
     def login(self):
         # If popup asking app notifications right has place - deny
