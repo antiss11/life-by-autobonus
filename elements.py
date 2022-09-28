@@ -22,3 +22,7 @@ RADIOS = {
 TEXT = {
     'APP_PROTECTION_METHOD_TITLE_ID': 'by.com.life.lifego:id/main_screen_text',
 }
+
+GAME = {
+    'TEXT_ID': 'by.com.life.lifego:id/main_text',
+}
