@@ -28,26 +28,10 @@ class AutobonusDriver:
         desired_caps["app"] = "/home/antiss/life.apk"
         desired_caps["appium:appWaitForLaunch"] = False
         self.driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
+
         self.login()
-
-        # If app requires protection method - select None
-        protection_title_element = self.get_element_with_wait(
-            elements.TEXT["APP_PROTECTION_METHOD_TITLE_ID"], timeout=30
-        )
-        protection_title_text = protection_title_element.get_attribute("text")
-        if protection_title_text == "Защитить Мой life:)":
-            # Select None
-            self.get_element_with_wait(
-                elements.RADIOS["APP_PROTECTION_METHOD_NONE_XPATH"], type="XPATH"
-            ).click()
-            self.get_element_with_wait(elements.BUTTONS["NEXT_ID"]).click()
-
-        # Click on the first icon in the hotbar (by default it is bonus action)
-        self.get_element_with_wait(
-            elements.BUTTONS["HOTBAR_FIRST_ID"], timeout=20
-        ).click()
-
-        self.get_element_with_wait(elements.GAME['TEXT_ID'], timeout=30)
+        self.skip_protection()
+        self.select_game()
 
     def login(self):
         # If popup asking app notifications right has place - deny
@@ -75,6 +59,28 @@ class AutobonusDriver:
 
         # Click login button
         self.get_element_with_wait(elements.BUTTONS["LOGIN_ID"]).click()
+
+    def skip_protection(self):
+        # If app requires protection method - select None
+        protection_title_element = self.get_element_with_wait(
+            elements.TEXT["APP_PROTECTION_METHOD_TITLE_ID"], timeout=30
+        )
+        protection_title_text = protection_title_element.get_attribute("text")
+        if protection_title_text == "Защитить Мой life:)":
+            # Select None
+            self.get_element_with_wait(
+                elements.RADIOS["APP_PROTECTION_METHOD_NONE_XPATH"], type="XPATH"
+            ).click()
+            self.get_element_with_wait(elements.BUTTONS["NEXT_ID"]).click()
+
+    def select_game(self):
+        # Click on the first icon in the hotbar (by default it is bonus action)
+        self.get_element_with_wait(
+            elements.BUTTONS["HOTBAR_FIRST_ID"], timeout=20
+        ).click()
+
+    def take_bonus(self):
+        self.get_element_with_wait(elements.GAME["TEXT_ID"], timeout=30)
 
     def get_element_with_wait(self, value, timeout=0, type="ID"):
         try:
