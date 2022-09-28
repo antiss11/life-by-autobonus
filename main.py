@@ -78,7 +78,10 @@ class AutobonusDriver:
 
     def take_bonus(self):
         self.get_element_with_wait(elements.GAME["TEXT_ID"], timeout=30)
-        subprocess.run("./shake.sh localhost 5554 8jCUSBH8oc5Nlu9y")
+    def swipe_to_top(self):
+        # This code guarantee that hotbar always can be clicked
+        for i in range(0, 5):
+            self.driver.swipe(start_x=0, start_y=100, end_x=0, end_y=700, duration=100)
 
     def get_element_with_wait(self, value, timeout=0, type="ID"):
         try:
