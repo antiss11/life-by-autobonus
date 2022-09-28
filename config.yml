@@ -1,0 +1,9 @@
+credentials:
+    login: ''
+    password: ''
+
+telnet:
+    emulator_host: ''
+    emulator_port: ''
+    token: ''
+  
