@@ -8,3 +8,6 @@ appium_server:
 
 telnet_token: ''
   
+android_vdi: 
+    host: ''
+    port: ''
