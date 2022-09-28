@@ -3,7 +3,7 @@
 This script allows you automate bonus gathering in android application [Мой life:)](https://play.google.com/store/apps/details?id=by.com.life.lifego&hl=en_US&gl=US).
 
 ## Requirements
-1. You must be a customer of a mobile operator [Life](https://life.com.by/).
+1. You must be a customer of a belarussian mobile operator [Life](https://life.com.by/).
 2. `Linux` as OS.
 3. [Appium Server](https://github.com/appium/appium-desktop/releases/tag/v1.22.3-4)(#appium_server).
 4. [Android Studio](https://developer.android.com/studio).
