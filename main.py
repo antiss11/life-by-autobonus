@@ -9,10 +9,11 @@ from selenium.webdriver.support import expected_conditions as EC
 import elements
 import subprocess
 import yaml
+from typing import Type
 from os.path import abspath
 
 
-def str2bool(str):
+def str2bool(str: str) -> bool | None:
     if str == "true":
         return True
     elif str == "false":
@@ -102,7 +103,9 @@ class AutobonusDriver:
         for i in range(0, 5):
             self.driver.swipe(start_x=0, start_y=100, end_x=0, end_y=700, duration=100)
 
-    def get_element_with_wait(self, value, timeout=0, type="ID"):
+    def get_element_with_wait(
+        self, value: str, timeout: int | float = 0, type: str = "ID"
+    ):
         try:
             element = WebDriverWait(self.driver, timeout).until(
                 EC.element_to_be_clickable((getattr(By, type), value))
@@ -111,7 +114,7 @@ class AutobonusDriver:
         except (NoSuchElementException, TimeoutException):
             return False
 
-    def input_text(self, where, text, type="ID"):
+    def input_text(self, where: str | Type[WebElement], text: str, type: str = "ID"):
         if isinstance(where, WebElement):
             where.send_keys(text)
         else:
