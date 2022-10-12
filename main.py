@@ -31,7 +31,11 @@ class AutobonusDriver:
         desired_caps = {}
         desired_caps["platformName"] = "Android"
         desired_caps["deviceName"] = "Android Emulator"
-        desired_caps["app"] = abspath("life.apk")
+        apk_path = self.config['apk_path']
+        if apk_path:
+            desired_caps["app"] = apk_path;
+        else:
+            desired_caps["app"] = abspath("life.apk")
         desired_caps["appium:appWaitForLaunch"] = False
         url = (
             f"http://{self.config['appium_server']['host']}:"
