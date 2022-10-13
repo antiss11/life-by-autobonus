@@ -94,7 +94,7 @@ class AutobonusDriver:
         ).click()
 
     def take_bonus(self):
-        self.get_element_with_wait(elements.GAME["TEXT_ID"], timeout=30)
+        self.get_element_with_wait(elements.GAME["PONY_ID"], timeout=30)
         subprocess.run(
             (
                 f"./shake.sh {self.config['emulator']['host']} "
