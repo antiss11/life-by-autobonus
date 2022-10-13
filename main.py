@@ -31,9 +31,9 @@ class AutobonusDriver:
         desired_caps = {}
         desired_caps["platformName"] = "Android"
         desired_caps["deviceName"] = "Android Emulator"
-        apk_path = self.config['apk_path']
+        apk_path = self.config["apk_path"]
         if apk_path:
-            desired_caps["app"] = apk_path;
+            desired_caps["app"] = apk_path
         else:
             desired_caps["app"] = abspath("life.apk")
         desired_caps["appium:appWaitForLaunch"] = False
@@ -86,13 +86,11 @@ class AutobonusDriver:
             self.get_element_with_wait(elements.BUTTONS["NEXT_ID"]).click()
 
     def select_game(self):
-        # Click on the first icon in the hotbar (by default it is bonus action)
-        self.get_element_with_wait(
-            elements.BUTTONS["HOTBAR_FIRST_ID"], timeout=20
-        ).click()
+        self.get_element_with_wait(elements.BUTTONS["MENU_ID"], timeout=20).click()
+        self.get_element_with_wait(elements.BUTTONS["GAME_ID"], timeout=10).click()
 
     def take_bonus(self):
-        self.get_element_with_wait(elements.GAME["TEXT_ID"], timeout=30)
+        self.get_element_with_wait(elements.GAME["PONY_ID"], timeout=30)
         subprocess.run(
             (
                 f"./shake.sh {self.config['emulator']['host']} "
@@ -100,12 +98,6 @@ class AutobonusDriver:
             ),
             shell=True,
         )
-
-    def swipe_to_top(self):
-        # This code guarantee that hotbar always can be clicked
-        sleep(1)
-        for i in range(0, 5):
-            self.driver.swipe(start_x=0, start_y=100, end_x=0, end_y=700, duration=100)
 
     def get_element_with_wait(
         self, value: str, timeout: int | float = 0, type: str = "ID"
@@ -131,6 +123,5 @@ if __name__ == "__main__":
     app.setUp()
     app.login()
     app.skip_protection()
-    app.swipe_to_top()
     app.select_game()
     app.take_bonus()

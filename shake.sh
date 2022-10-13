@@ -9,7 +9,7 @@ spawn telnet $host $port
 expect "OK"
 send "auth $token\r"
 
-for {set i 0} {$i <= 3} {incr i} {
+for {set i 0} {$i <= 4} {incr i} {
 	send "rotate\r"
-	sleep 0.2
+	sleep 0.1
 }
