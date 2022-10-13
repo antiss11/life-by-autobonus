@@ -86,9 +86,11 @@ class AutobonusDriver:
             self.get_element_with_wait(elements.BUTTONS["NEXT_ID"]).click()
 
     def select_game(self):
-        # Click on the first icon in the hotbar (by default it is bonus action)
         self.get_element_with_wait(
-            elements.BUTTONS["HOTBAR_FIRST_ID"], timeout=20
+            elements.BUTTONS['MENU_ID'], timeout=20
+        ).click()
+        self.get_element_with_wait(
+            elements.BUTTONS['GAME_ID'], timeout=10
         ).click()
 
     def take_bonus(self):
