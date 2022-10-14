@@ -8,5 +8,8 @@ appium_server:
 
 telnet_token: ''
   
-emulator: 
+emulator:
+    host: ''
+    port: ''
+
 apk_path: ''
